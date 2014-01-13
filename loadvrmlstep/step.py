@@ -46,7 +46,7 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         may be connected up to a button in a widget for example.
         '''
         # Put your execute step code here before calling the '_doneExecution' method.
-        S = simplemesh_tools.vrml2SimpleMesh(self._config['Filename'])
+        S = simplemesh_tools.vrml2SimpleMesh(self._config['filename'])
         s = S[int(self._config['model index'])]
         self._V = s.v.copy()
         self._T = s.f.copy()
