@@ -19,7 +19,7 @@ class LoadVRMLStep(WorkflowStepMountPoint):
     '''
 
     def __init__(self, location):
-        super(LoadSTLStep, self).__init__('Load VRML', location)
+        super(LoadVRMLStep, self).__init__('Load VRML', location)
         self._configured = False # A step cannot be executed until it has been configured.
         self._category = 'Input'
         # Add any other initialisation code here:
