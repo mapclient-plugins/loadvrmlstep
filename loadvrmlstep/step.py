@@ -25,6 +25,9 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         # Add any other initialisation code here:
         # Ports:
         self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
+                      'http://physiomeproject.org/workflow/1.0/rdf-schema#uses',
+                      'String'))
+        self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
                       'http://physiomeproject.org/workflow/1.0/rdf-schema#provides',
                       'ju#pointcoordinates'))
         self.addPort(('http://physiomeproject.org/workflow/1.0/rdf-schema#port',
@@ -37,6 +40,7 @@ class LoadVRMLStep(WorkflowStepMountPoint):
 
         self._V = None
         self._T = None
+        self._filename = None
 
 
     def execute(self):
@@ -46,7 +50,12 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         may be connected up to a button in a widget for example.
         '''
         # Put your execute step code here before calling the '_doneExecution' method.
-        S = simplemesh_tools.vrml2SimpleMesh(self._config['filename'])
+        if self._filename == None:
+            filename = self._config['filename']
+        else:
+            filename = self._filename
+
+        S = simplemesh_tools.vrml2SimpleMesh(filename)
         s = S[int(self._config['model index'])]
         self._V = s.v.copy()
         self._T = s.f.copy()
@@ -58,10 +67,14 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         The index is the index of the port in the port list.  If there is only one
         provides port for this step then the index can be ignored.
         '''
-        if index == 0:
+        if index == 1:
             return self._V
-        elif index == 1:
+        elif index == 2:
             return self._T
+
+    def setPortData(self, index, dataIn):
+        if index==0:
+            self._filename = dataIn
 
     def configure(self):
         '''
