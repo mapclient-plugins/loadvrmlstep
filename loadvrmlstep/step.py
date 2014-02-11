@@ -3,8 +3,6 @@
 MAP Client Plugin Step
 '''
 import os
-
-from PySide import QtGui
 from PySide import QtCore
 
 from mountpoints.workflowstep import WorkflowStepMountPoint
@@ -14,8 +12,8 @@ from gias.common import simplemesh_tools
 
 class LoadVRMLStep(WorkflowStepMountPoint):
     '''
-    Skeleton step which is intended to be a helpful starting point
-    for new steps.
+    Step for loading vertex coordinates and triangles from
+    a vrml file on disk.
     '''
 
     def __init__(self, location):
