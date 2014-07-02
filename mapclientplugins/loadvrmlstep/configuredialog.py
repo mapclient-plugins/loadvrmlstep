@@ -1,7 +1,7 @@
 
 
 from PySide import QtGui
-from loadvrmlstep.ui_configuredialog import Ui_Dialog
+from mapclientplugins.loadvrmlstep.ui_configuredialog import Ui_Dialog
 from PySide.QtGui import QDialog, QFileDialog, QDialogButtonBox
 
 INVALID_STYLE_SHEET = 'background-color: rgba(239, 0, 0, 50)'

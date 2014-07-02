@@ -7,8 +7,8 @@ import os
 from PySide import QtGui
 from PySide import QtCore
 
-from mountpoints.workflowstep import WorkflowStepMountPoint
-from loadvrmlstep.configuredialog import ConfigureDialog
+from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
+from mapclientplugins.loadvrmlstep.configuredialog import ConfigureDialog
 
 from gias.common import simplemesh_tools
 
