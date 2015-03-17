@@ -1,5 +1,5 @@
 
-
+import os
 from PySide import QtGui
 from mapclientplugins.loadvrmlstep.ui_configuredialog import Ui_Dialog
 from PySide.QtGui import QDialog, QFileDialog, QDialogButtonBox
@@ -32,7 +32,9 @@ class ConfigureDialog(QtGui.QDialog):
         self._makeConnections()
 
     def _makeConnections(self):
-        self._ui.lineEdit0.textChanged.connect(self.validate)
+        self._ui.idLineEdit.textChanged.connect(self.validate)
+        self._ui.filenameLineEdit.textChanged.connect(self._filenameEdited)
+        self._ui.filenamePushButton.clicked.connect(self._filenameClicked)
 
     def accept(self):
         '''
@@ -56,13 +58,21 @@ class ConfigureDialog(QtGui.QDialog):
         '''
         # Determine if the current identifier is unique throughout the workflow
         # The identifierOccursCount method is part of the interface to the workflow framework.
-        value = self.identifierOccursCount(self._ui.lineEdit0.text())
-        valid = (value == 0) or (value == 1 and self._previousIdentifier == self._ui.lineEdit0.text())
-        if valid:
-            self._ui.lineEdit0.setStyleSheet(DEFAULT_STYLE_SHEET)
-        else:
-            self._ui.lineEdit0.setStyleSheet(INVALID_STYLE_SHEET)
+        idValue = self.identifierOccursCount(self._ui.idLineEdit.text())
+        idValid = (idValue == 0) or (idValue == 1 and self._previousIdentifier == self._ui.idLineEdit.text())
 
+        if idValid:
+            self._ui.idLineEdit.setStyleSheet(DEFAULT_STYLE_SHEET)
+        else:
+            self._ui.idLineEdit.setStyleSheet(INVALID_STYLE_SHEET)
+
+        filenameValid = os.path.exists(self._ui.filenameLineEdit.text())
+        if filenameValid:
+            self._ui.filenameLineEdit.setStyleSheet(DEFAULT_STYLE_SHEET)
+        else:
+            self._ui.filenameLineEdit.setStyleSheet(INVALID_STYLE_SHEET)
+            
+        valid = idValid and filenameValid
         self._ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(valid)
 
         return valid
@@ -73,11 +83,12 @@ class ConfigureDialog(QtGui.QDialog):
         set the _previousIdentifier value so that we can check uniqueness of the
         identifier over the whole of the workflow.
         '''
-        self._previousIdentifier = self._ui.lineEdit0.text()
+        self._previousIdentifier = self._ui.idLineEdit.text()
+        self._previousFilename = self._ui.filenameLineEdit.text()
         config = {}
-        config['identifier'] = self._ui.lineEdit0.text()
-        config['filename'] = self._ui.lineEdit1.text()
-        config['model index'] = self._ui.lineEdit2.text()
+        config['identifier'] = self._ui.idLineEdit.text()
+        config['filename'] = self._ui.filenameLineEdit.text()
+        config['model index'] = self._ui.modelIndexLineEdit.text()
         return config
 
     def setConfig(self, config):
@@ -87,7 +98,16 @@ class ConfigureDialog(QtGui.QDialog):
         identifier over the whole of the workflow.
         '''
         self._previousIdentifier = config['identifier']
-        self._ui.lineEdit0.setText(config['identifier'])
-        self._ui.lineEdit1.setText(config['filename'])
-        self._ui.lineEdit2.setText(config['model index'])
+        self._previousFilename = config['filename']
+        self._ui.idLineEdit.setText(config['identifier'])
+        self._ui.filenameLineEdit.setText(config['filename'])
+        self._ui.modelIndexLineEdit.setText(config['model index'])
 
+    def _filenameClicked(self):
+        location = QFileDialog.getOpenFileName(self, 'Select File Location', self._previousFilename)
+        if location[0]:
+            self._previousFilename = location[0]
+            self._ui.filenameLineEdit.setText(location[0])
+
+    def _filenameEdited(self):
+        self.validate()

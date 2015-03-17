@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'configuredialog.ui'
+# Form implementation generated from reading ui file 'qt/configuredialog.ui'
 #
-# Created: Mon Jan 13 13:28:10 2014
-#      by: pyside-uic 0.2.13 running on PySide 1.1.0
+# Created: Wed Mar 18 12:05:35 2015
+#      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -21,24 +21,32 @@ class Ui_Dialog(object):
         self.formLayout = QtGui.QFormLayout(self.configGroupBox)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setObjectName("formLayout")
-        self.label0 = QtGui.QLabel(self.configGroupBox)
-        self.label0.setObjectName("label0")
-        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label0)
-        self.lineEdit0 = QtGui.QLineEdit(self.configGroupBox)
-        self.lineEdit0.setObjectName("lineEdit0")
-        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEdit0)
-        self.label1 = QtGui.QLabel(self.configGroupBox)
-        self.label1.setObjectName("label1")
-        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label1)
-        self.lineEdit1 = QtGui.QLineEdit(self.configGroupBox)
-        self.lineEdit1.setObjectName("lineEdit1")
-        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.lineEdit1)
-        self.lineEdit2 = QtGui.QLineEdit(self.configGroupBox)
-        self.lineEdit2.setObjectName("lineEdit2")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.lineEdit2)
-        self.label2 = QtGui.QLabel(self.configGroupBox)
-        self.label2.setObjectName("label2")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label2)
+        self.idLabel = QtGui.QLabel(self.configGroupBox)
+        self.idLabel.setObjectName("idLabel")
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.idLabel)
+        self.idLineEdit = QtGui.QLineEdit(self.configGroupBox)
+        self.idLineEdit.setObjectName("idLineEdit")
+        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.idLineEdit)
+        self.filenameLabel = QtGui.QLabel(self.configGroupBox)
+        self.filenameLabel.setObjectName("filenameLabel")
+        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.filenameLabel)
+        self.modelIndexLabel = QtGui.QLabel(self.configGroupBox)
+        self.modelIndexLabel.setObjectName("modelIndexLabel")
+        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.modelIndexLabel)
+        self.modelIndexLineEdit = QtGui.QLineEdit(self.configGroupBox)
+        self.modelIndexLineEdit.setObjectName("modelIndexLineEdit")
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.modelIndexLineEdit)
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.filenameLineEdit = QtGui.QLineEdit(self.configGroupBox)
+        self.filenameLineEdit.setObjectName("filenameLineEdit")
+        self.horizontalLayout_2.addWidget(self.filenameLineEdit)
+        self.filenamePushButton = QtGui.QPushButton(self.configGroupBox)
+        self.filenamePushButton.setDefault(False)
+        self.filenamePushButton.setFlat(False)
+        self.filenamePushButton.setObjectName("filenamePushButton")
+        self.horizontalLayout_2.addWidget(self.filenamePushButton)
+        self.formLayout.setLayout(1, QtGui.QFormLayout.FieldRole, self.horizontalLayout_2)
         self.gridLayout.addWidget(self.configGroupBox, 0, 0, 1, 1)
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -52,8 +60,9 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "ConfigureDialog", None, QtGui.QApplication.UnicodeUTF8))
-        self.label0.setText(QtGui.QApplication.translate("Dialog", "identifier:  ", None, QtGui.QApplication.UnicodeUTF8))
-        self.label1.setText(QtGui.QApplication.translate("Dialog", "filename:  ", None, QtGui.QApplication.UnicodeUTF8))
-        self.label2.setText(QtGui.QApplication.translate("Dialog", "model index:", None, QtGui.QApplication.UnicodeUTF8))
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Configure Load VRML Step", None, QtGui.QApplication.UnicodeUTF8))
+        self.idLabel.setText(QtGui.QApplication.translate("Dialog", "Identifier:  ", None, QtGui.QApplication.UnicodeUTF8))
+        self.filenameLabel.setText(QtGui.QApplication.translate("Dialog", "Filename:  ", None, QtGui.QApplication.UnicodeUTF8))
+        self.modelIndexLabel.setText(QtGui.QApplication.translate("Dialog", "Model Number:", None, QtGui.QApplication.UnicodeUTF8))
+        self.filenamePushButton.setText(QtGui.QApplication.translate("Dialog", "Browse", None, QtGui.QApplication.UnicodeUTF8))
 
