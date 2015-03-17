@@ -85,6 +85,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>idLineEdit</tabstop>
+  <tabstop>filenameLineEdit</tabstop>
+  <tabstop>filenamePushButton</tabstop>
+  <tabstop>modelIndexLineEdit</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

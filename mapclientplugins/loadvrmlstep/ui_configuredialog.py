@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt/configuredialog.ui'
 #
-# Created: Wed Mar 18 12:05:35 2015
+# Created: Wed Mar 18 12:14:12 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -58,6 +58,10 @@ class Ui_Dialog(object):
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("accepted()"), Dialog.accept)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.idLineEdit, self.filenameLineEdit)
+        Dialog.setTabOrder(self.filenameLineEdit, self.filenamePushButton)
+        Dialog.setTabOrder(self.filenamePushButton, self.modelIndexLineEdit)
+        Dialog.setTabOrder(self.modelIndexLineEdit, self.buttonBox)
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Configure Load VRML Step", None, QtGui.QApplication.UnicodeUTF8))
