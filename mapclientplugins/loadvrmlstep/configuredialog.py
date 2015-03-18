@@ -25,6 +25,7 @@ class ConfigureDialog(QtGui.QDialog):
         # and know how many occurrences of the current identifier there should
         # be.
         self._previousIdentifier = ''
+        self._previousFilename = ''
         # Set a place holder for a callable that will get set from the step.
         # We will use this method to decide whether the identifier is unique.
         self.identifierOccursCount = None
