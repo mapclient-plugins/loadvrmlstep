@@ -1,4 +1,3 @@
-
 import os
 from PySide2 import QtWidgets
 from mapclientplugins.loadvrmlstep.ui_configuredialog import Ui_Dialog
@@ -6,6 +5,7 @@ from PySide2.QtWidgets import QFileDialog, QDialogButtonBox
 
 INVALID_STYLE_SHEET = 'background-color: rgba(239, 0, 0, 50)'
 DEFAULT_STYLE_SHEET = ''
+
 
 class ConfigureDialog(QtWidgets.QDialog):
     '''
@@ -17,7 +17,7 @@ class ConfigureDialog(QtWidgets.QDialog):
         Constructor
         '''
         QtWidgets.QDialog.__init__(self, parent)
-        
+
         self._ui = Ui_Dialog()
         self._ui.setupUi(self)
 
@@ -45,8 +45,9 @@ class ConfigureDialog(QtWidgets.QDialog):
         result = QtWidgets.QMessageBox.Yes
         if not self.validate():
             result = QtWidgets.QMessageBox.warning(self, 'Invalid Configuration',
-                'This configuration is invalid.  Unpredictable behaviour may result if you choose \'Yes\', are you sure you want to save this configuration?)',
-                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+                                                   'This configuration is invalid.  Unpredictable behaviour may result if you choose \'Yes\', are you sure you want to save this configuration?)',
+                                                   QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                                   QtWidgets.QMessageBox.No)
 
         if result == QtWidgets.QMessageBox.Yes:
             QtWidgets.QDialog.accept(self)
@@ -72,7 +73,7 @@ class ConfigureDialog(QtWidgets.QDialog):
             self._ui.filenameLineEdit.setStyleSheet(DEFAULT_STYLE_SHEET)
         else:
             self._ui.filenameLineEdit.setStyleSheet(INVALID_STYLE_SHEET)
-            
+
         valid = idValid and filenameValid
         self._ui.buttonBox.button(QDialogButtonBox.Ok).setEnabled(valid)
 
