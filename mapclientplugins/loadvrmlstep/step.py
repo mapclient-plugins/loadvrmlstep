@@ -2,7 +2,6 @@
 '''
 MAP Client Plugin Step
 '''
-import os
 import json
 
 from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
