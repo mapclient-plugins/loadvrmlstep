@@ -6,7 +6,9 @@ import json
 from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
 from mapclientplugins.loadvrmlstep.configuredialog import ConfigureDialog
 
-from gias.common import simplemesh_tools
+#from gias.common import simplemesh_tools
+from gias2.mesh import simplemesh
+
 
 
 class LoadVRMLStep(WorkflowStepMountPoint):
@@ -51,7 +53,8 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         else:
             filename = self._filename
 
-        S = simplemesh_tools.vrml2SimpleMesh(filename)
+        #S = simplemesh_tools.vrml2SimpleMesh(filename)
+        S = simplemesh.vrml_2_simple_mesh(filename)
         s = S[int(self._config['model index'])]
         self._V = s.v.copy()
         self._T = s.f.copy()
