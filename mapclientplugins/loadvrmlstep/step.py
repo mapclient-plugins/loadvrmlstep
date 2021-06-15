@@ -1,14 +1,13 @@
-
 '''
 MAP Client Plugin Step
 '''
-import os
 import json
 
 from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
 from mapclientplugins.loadvrmlstep.configuredialog import ConfigureDialog
 
-from gias.common import simplemesh_tools
+from gias2.mesh import simplemesh
+
 
 class LoadVRMLStep(WorkflowStepMountPoint):
     '''
@@ -18,7 +17,7 @@ class LoadVRMLStep(WorkflowStepMountPoint):
 
     def __init__(self, location):
         super(LoadVRMLStep, self).__init__('Load VRML', location)
-        self._configured = False # A step cannot be executed until it has been configured.
+        self._configured = False  # A step cannot be executed until it has been configured.
         self._category = 'Source'
         # Add any other initialisation code here:
         # Ports:
@@ -40,7 +39,6 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         self._T = None
         self._filename = None
 
-
     def execute(self):
         '''
         Add your code here that will kick off the execution of the step.
@@ -53,7 +51,7 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         else:
             filename = self._filename
 
-        S = simplemesh_tools.vrml2SimpleMesh(filename)
+        S = simplemesh.vrml_2_simple_mesh(filename)
         s = S[int(self._config['model index'])]
         self._V = s.v.copy()
         self._T = s.f.copy()
@@ -71,7 +69,7 @@ class LoadVRMLStep(WorkflowStepMountPoint):
             return self._T
 
     def setPortData(self, index, dataIn):
-        if index==0:
+        if index == 0:
             self._filename = dataIn
 
     def configure(self):
@@ -82,15 +80,15 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         then set:
             self._configured = True
         '''
-        dlg = ConfigureDialog()
+        dlg = ConfigureDialog(self._main_window)
         dlg.identifierOccursCount = self._identifierOccursCount
         dlg.setConfig(self._config)
         dlg.validate()
         dlg.setModal(True)
-        
+
         if dlg.exec_():
             self._config = dlg.getConfig()
-        
+
         self._configured = dlg.validate()
         self._configuredObserver()
 
@@ -124,5 +122,3 @@ class LoadVRMLStep(WorkflowStepMountPoint):
         d.identifierOccursCount = self._identifierOccursCount
         d.setConfig(self._config)
         self._configured = d.validate()
-
-
